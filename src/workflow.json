@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "version": "1.0"
+  },
+  "processes": {
+    "Stakeholder Engagement Management": {
+      "name": "Stakeholder Engagement Management",
+      "subprocesses": {
+        "Policy Review and Monitoring": {
+          "name": "Policy Review and Monitoring",
+          "risks": [
+            {
+              "id": "R006",
+              "name": "Outdated Policy Framework",
+              "description": "Without regular reviews, the policy may fall behind current stakeholder expectations or regulatory requirements, leading to misaligned practices."
+            },
+            {
+              "id": "R007",
+              "name": "Lack of Cross-Functional Oversight",
+              "description": "If reviews are not conducted by a cross-functional team, emerging risks or gaps in stakeholder engagement may be overlooked."
+            }
+          ],
+          "controls": [
+            {
+              "id": "C006",
+              "name": "Regular Policy and ESG Review",
+              "description": "Conduct frequent reviews by the ESG team to ensure that the policy remains current and aligned with evolving stakeholder needs, best practices, and regulatory standards."
+            },
+            {
+              "id": "C007",
+              "name": "Cross-Functional Review Committees",
+              "description": "Establish committees with representation from various departments to provide comprehensive oversight and timely updates to the policy."
+            }
+          ]
+        },
+        "Stakeholder Engagement Approach": {
+          "name": "Stakeholder Engagement Approach",
+          "risks": [
+            {
+              "id": "R003",
+              "name": "Ineffective Communication",
+              "description": "Failure to use the appropriate communication channels may cause misinterpretation of messages, reduced trust, and stakeholder disengagement."
+            },
+            {
+              "id": "R004",
+              "name": "Inconsistent Engagement",
+              "description": "Irregular or insufficient engagement with stakeholders can lead to disengagement and missed opportunities for critical feedback."
+            },
+            {
+              "id": "R005",
+              "name": "Ineffective Feedback Capture",
+              "description": "A lack of structured feedback mechanisms may result in inadequate tracking and response to stakeholder concerns, reducing the effectiveness of engagement."
+            }
+          ],
+          "controls": [
+            {
+              "id": "C003",
+              "name": "Multi-Channel Communication Strategy",
+              "description": "Adopt numerous engagement channels (customer surveys, digital platforms, meetings, physical interactions, etc.) to ensure clear, timely, and transparent communication."
+            },
+            {
+              "id": "C004",
+              "name": "Regular Engagement Scheduling",
+              "description": "Establish scheduled, continuous engagements (e.g., periodic surveys, annual meetings, ongoing digital interactions) to maintain consistent dialogue with stakeholders."
+            },
+            {
+              "id": "C005",
+              "name": "Stakeholder Matrix and Feedback Mechanism",
+              "description": "Utilize a stakeholder matrix to document issues and feedback, ensuring concerns are noted, assessed, and mitigated appropriately."
+            }
+          ]
+        },
+        "Stakeholder Identification and Prioritization": {
+          "name": "Stakeholder Identification and Prioritization",
+          "risks": [
+            {
+              "id": "R001",
+              "name": "Inadequate Stakeholder Identification",
+              "description": "Failure to accurately identify all relevant internal and external stakeholders, which may result in overlooking key interests or emerging operational risks."
+            },
+            {
+              "id": "R002",
+              "name": "Inaccurate Prioritization",
+              "description": "Mis-prioritizing stakeholders may lead to an ineffective engagement strategy and unaddressed critical issues."
+            }
+          ],
+          "controls": [
+            {
+              "id": "C001",
+              "name": "Comprehensive Stakeholder Analysis Framework",
+              "description": "Use systematic internal and external environmental analysis to identify all individuals, groups, and organizations that impact or are impacted by the company\u2019s operations."
+            },
+            {
+              "id": "C002",
+              "name": "Defined Prioritization Criteria",
+              "description": "Implement structured criteria based on legal obligations, influence on decision-making, and potential impact to properly prioritize stakeholders."
+            }
+          ]
+        }
+      }
+    }
+  }
+}
