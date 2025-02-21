@@ -1,38 +1,33 @@
-import { useEffect, useRef } from "react";
-import { dia, shapes } from "@joint/core";
+
 import "./App.css";
 import FlowChart from "./FlowChart";
+import FileUploader from "./FileUploder";
+import EditableAgGrid from "./Table";
+import { useEffect, useState } from "react";
+import workflowData from "./workflow.json";
 
 function App() {
-  const canvas = useRef(null);
+  const [jsonData,setJsonData] = useState({});
+  const [showGraph,setShowgraph] = useState(false)
 
-  //   useEffect(() => {
-  //     const graph = new dia.Graph({}, { cellNamespace: shapes });
+  useEffect(()=>{
+    setJsonData(workflowData)
+  },[])
 
-  //     const paper = new dia.Paper({
-  //       el: canvas.current,
-  //       model: graph,
-  //       background: {
-  //         color: "#F8F9FA",
-  //       },
-  //       cellViewNamespace: shapes,
-  //     });
+  const isHaveRow = jsonData && Object.keys(jsonData).length > 0
 
-  //     const rect = new shapes.standard.Rectangle({
-  //       position: { x: 100, y: 100 },
-  //       size: { width: 100, height: 50 },
-  //       attrs: {
-  //         label: {
-  //           text: "Hello World",
-  //         },
-  //       },
-  //     });
-
-  //     rect.addTo(graph);
-  //   }, []);
-
-  //   return <div className="canvas" ref={canvas} />;
-  return <FlowChart />;
+  return <>
+    <div id="root">
+      <h1>GRC Risk Control Managent Analayser </h1>
+      <FileUploader setJsonData={setJsonData}/>
+      {isHaveRow && <EditableAgGrid 
+      setJsonData={setJsonData} 
+      jsonData={jsonData}
+      setShowgraph={setShowgraph}
+      />}
+      {showGraph && <FlowChart jsonData={jsonData} />}
+    </div>
+  </>
 }
 
 export default App;
