@@ -5,6 +5,8 @@ import FileUploader from "./FileUploder";
 import EditableAgGrid from "./Table";
 import { useState } from "react";
 import ControlRisk from "./ControlRisk";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import workflowData from "./workflow.json";
 
 function App() {
@@ -14,7 +16,8 @@ function App() {
 
   return <>
     <div id="root">
-      <h1>GRC Risk Control Managent Analayser </h1>
+    <ToastContainer position="top-right" autoClose={3000} />
+      <h1 style={{textAlign: "center"}} >GRC Risk Control Managent Analayser </h1>
       <FileUploader setJsonData={setJsonData}/>
       {isHaveRow && <EditableAgGrid 
       setJsonData={setJsonData} 
