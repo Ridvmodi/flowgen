@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { dia, shapes } from "@joint/core";
 import * as XLSX from "xlsx";
 import workflowData from "./workflow.json";
-import { Modal, Box, Button, TextField } from "@mui/material";
+import { Modal, Box, Button, TextField, Paper, Typography } from "@mui/material";
 
 const FlowChart = () => {
   const graphRef = useRef(null);
@@ -37,28 +37,23 @@ const FlowChart = () => {
       });
       elements.push(processRect);
 
-
-
       let subprocessY = yOffset + 100;
       let xOffset = 140;
       const screenWidth = 1200;
       let rowHeight = 0;
       let subProcessId = [];
 
-
       Object.keys(process.subprocesses).forEach((subKey) => {
         const subprocess = process.subprocesses[subKey];
 
-        // Dynamic width based on text length
         const textWidth = subprocess.name.length * 7;
         const subWidth = Math.max(100, textWidth + 40);
         const subHeight = 120;
 
-        // Check if subprocess goes beyond screen width, move to new row
         if (xOffset + subWidth > screenWidth) {
-          xOffset = 140; // Reset X to start of new row
-          subprocessY += rowHeight + 20; // Move to next row
-          rowHeight = 0; // Reset row height
+          xOffset = 140;
+          subprocessY += rowHeight + 20;
+          rowHeight = 0;
         }
 
         const subprocessGroup = new shapes.standard.Rectangle({
@@ -74,7 +69,6 @@ const FlowChart = () => {
         subProcessId.push(subprocessGroup.id);
         subprocessGroup.prop("customData", subprocess);
 
-        // Risks (Triangles)
         subprocess.risks.forEach((risk, index) => {
           const riskTriangle = new shapes.standard.Polygon({
             position: { x: xOffset - 16, y: subprocessY + subHeight - (index + 1) * 20 },
@@ -90,7 +84,6 @@ const FlowChart = () => {
           elements.push(riskTriangle);
         });
 
-        // Controls (Circles)
         subprocess.controls.forEach((control, index) => {
           const controlCircle = new shapes.standard.Circle({
             position: { x: xOffset + subWidth - 15, y: subprocessY + (index * 15) - 15 },
@@ -104,13 +97,12 @@ const FlowChart = () => {
           elements.push(controlCircle);
         });
 
-        xOffset += subWidth + 30; // Move right
-        rowHeight = Math.max(rowHeight, subHeight); // Update row height
+        xOffset += subWidth + 30;
+        rowHeight = Math.max(rowHeight, subHeight);
       });
 
-      yOffset = subprocessY + rowHeight + 50; // Move yOffset down after processes
+      yOffset = subprocessY + rowHeight + 50;
 
-      // Add links between subprocesses
       for (let i = 0; i < subProcessId.length - 1; i++) {
         links.push(
           new shapes.standard.Link({
@@ -124,7 +116,6 @@ const FlowChart = () => {
 
     graph.addCells([...elements, ...links]);
 
-    // Double click to edit subprocess name
     paper.on("element:pointerdblclick", (elementView) => {
       const element = elementView.model;
       const subprocessData = element.prop("customData");
@@ -144,16 +135,27 @@ const FlowChart = () => {
 
   const handleUpdate = () => {
     if (selectedSubprocess) {
-      selectedSubprocess.attr("label/text", updatedName); // Update name in the graph
-      selectedSubprocess.prop("customData/name", updatedName); // Update stored data
-      setSelectedSubprocess(null); // Close modal
+      selectedSubprocess.attr("label/text", updatedName);
+      selectedSubprocess.prop("customData/name", updatedName);
+      setSelectedSubprocess(null);
     }
   };
 
   return (
-    <div style={{ border: "1px solid black", overflow: "auto", margin: "2em" }}>
-      <button onClick={exportToExcel} style={{ marginBottom: "10px" }}>Export to Excel</button>
-      <div ref={graphRef}></div>
+    <Paper elevation={3} sx={{ padding: 2, borderRadius: 2, margin: "2em", overflow: "auto" }}>
+      <Typography variant="h6" gutterBottom>
+        Workflow Diagram
+      </Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={exportToExcel}
+        sx={{ mb: 2, textTransform: "none", fontWeight: "bold" }}
+      >
+        Export to Excel
+      </Button>
+      <Box ref={graphRef} sx={{ border: "1px solid black", backgroundColor: "#fff", minHeight: 600 }} />
+
       <Modal open={!!selectedSubprocess} onClose={() => setSelectedSubprocess(null)}>
         <Box
           sx={{
@@ -168,7 +170,9 @@ const FlowChart = () => {
             borderRadius: 2,
           }}
         >
-          <h3>Edit Subprocess</h3>
+          <Typography variant="h6" gutterBottom>
+            Edit Subprocess
+          </Typography>
           <TextField
             label="Subprocess Name"
             value={updatedName}
@@ -176,12 +180,12 @@ const FlowChart = () => {
             fullWidth
             sx={{ mb: 2 }}
           />
-          <Button variant="contained" onClick={handleUpdate}>
+          <Button variant="contained" color="primary" onClick={handleUpdate}>
             Save
           </Button>
         </Box>
       </Modal>
-    </div>
+    </Paper>
   );
 };
 

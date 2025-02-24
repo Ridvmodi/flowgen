@@ -3,17 +3,13 @@ import "./App.css";
 import FlowChart from "./FlowChart";
 import FileUploader from "./FileUploder";
 import EditableAgGrid from "./Table";
-import { useEffect, useState } from "react";
-import workflowData from "./workflow.json";
+import { useState } from "react";
+import ControlRisk from "./ControlRisk";
+// import workflowData from "./workflow.json";
 
 function App() {
   const [jsonData,setJsonData] = useState({});
-  const [showGraph,setShowgraph] = useState(false)
-
-  useEffect(()=>{
-    setJsonData(workflowData)
-  },[])
-
+  const [showGraph,setShowgraph] = useState(false);
   const isHaveRow = jsonData && Object.keys(jsonData).length > 0
 
   return <>
@@ -26,6 +22,7 @@ function App() {
       setShowgraph={setShowgraph}
       />}
       {showGraph && <FlowChart jsonData={jsonData} />}
+      {isHaveRow && <ControlRisk jsonData={jsonData}  />}
     </div>
   </>
 }
