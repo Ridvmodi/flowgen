@@ -13,7 +13,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { fetchJsonData, getStatus, uploadFile } from "./utils";
 import { toast } from "react-toastify";
 
-const FileUploader = ({ setJsonData }) => {
+const FileUploader = ({ setFileUploadResponse, setJsonData }) => {
   const [file, setFile] = useState(null);
   const [isFileUploading, setIsFileUploading] = useState(false);
 
@@ -23,6 +23,7 @@ const FileUploader = ({ setJsonData }) => {
       const { status } = res || {};
 
       if (status?.status === "Completed") {
+        setFileUploadResponse({ ...status, fileId });
         fetchJsonData(status)
           .then((data) => {
             setJsonData(data);

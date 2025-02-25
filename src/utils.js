@@ -46,7 +46,7 @@ export const getStatus = async(fileId)=>{
 }
 
 export const updateCsv = async(payload)=>{
-    const resp = await axios.post(`${baseUrl}upadte${ng}`,payload,hedervalue);
+    const resp = await axios.post(`${baseUrl}update${ng}`,payload,hedervalue);
     return resp.data
     // return hardcodedResponse.update;
 }
