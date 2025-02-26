@@ -29,7 +29,9 @@ const FileUploader = ({ setFileUploadResponse, setJsonData }) => {
             setJsonData(data);
             toast.success("File processed successfully!");
           })
-          .catch((error) => toast.error(error.message || "Error fetching data"));
+          .catch((error) =>
+            toast.error(error.message || "Error fetching data")
+          );
 
         setIsFileUploading(false);
       } else {
@@ -40,6 +42,11 @@ const FileUploader = ({ setFileUploadResponse, setJsonData }) => {
       setIsFileUploading(false);
       toast.error(error.message || "Failed to check file status");
     }
+  };
+
+  const clearFileInput = () => {
+    const fileInput = document.getElementById("file-input");
+    fileInput.value = "";
   };
 
   const handleFileChange = async (event) => {
@@ -75,6 +82,7 @@ const FileUploader = ({ setFileUploadResponse, setJsonData }) => {
   };
 
   const handleRemoveFile = () => {
+    clearFileInput();
     setJsonData({});
     setFile(null);
     setIsFileUploading(false);
@@ -120,7 +128,13 @@ const FileUploader = ({ setFileUploadResponse, setJsonData }) => {
           ) : (
             "Browse files"
           )}
-          <input type="file" hidden accept=".pdf,.docx" onChange={handleFileChange} />
+          <input
+            id="file-input"
+            type="file"
+            hidden
+            accept=".pdf,.docx"
+            onChange={handleFileChange}
+          />
         </Button>
       </Paper>
 
@@ -141,7 +155,11 @@ const FileUploader = ({ setFileUploadResponse, setJsonData }) => {
             <InsertDriveFileIcon color="primary" sx={{ mr: 1 }} />
             <Typography variant="body2">{file.name}</Typography>
           </Box>
-          <IconButton size="small" onClick={handleRemoveFile} disabled={isFileUploading}>
+          <IconButton
+            size="small"
+            onClick={handleRemoveFile}
+            disabled={isFileUploading}
+          >
             <CloseIcon fontSize="small" />
           </IconButton>
         </Paper>
