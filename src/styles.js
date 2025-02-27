@@ -7,7 +7,7 @@ const ContainerSx = {
 
 const FullScreenBtnSx = {
   top: "55px",
-  left: "98%",
+  left: "97%",
   width: "40px",
   position: "relative",
   zIndex: 12242,

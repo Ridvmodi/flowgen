@@ -186,13 +186,6 @@ const FlowChart = ({ isFileUploading, jsonData }) => {
 
     elements.push(ProcessDefinition);
     elements.push(ProcessText);
-    // links.push(
-    //   new shapes.standard.Link({
-    //     source: { id: ProcessDefinition.id },
-    //     target: { id: ProcessText.id },
-    //     attrs: { line: { stroke: "#000" } },
-    //   })
-    // );
 
     const SubProcessDefinition = new shapes.standard.Rectangle({
       position: { x: 100, y: yOffset },
@@ -216,13 +209,6 @@ const FlowChart = ({ isFileUploading, jsonData }) => {
 
     elements.push(SubProcessDefinition);
     elements.push(SubProcessText);
-    // links.push(
-    //   new shapes.standard.Link({
-    //     source: { id: SubProcessDefinition.id },
-    //     target: { id: SubProcessText.id },
-    //     attrs: { line: { stroke: "#000" } },
-    //   })
-    // );
 
     const RiskDefinition = new shapes.standard.Polygon({
       position: {
@@ -251,13 +237,6 @@ const FlowChart = ({ isFileUploading, jsonData }) => {
 
     elements.push(RiskDefinition);
     elements.push(RiskDefinitionText);
-    // links.push(
-    //   new shapes.standard.Link({
-    //     source: { id: RiskDefinition.id },
-    //     target: { id: RiskDefinitionText.id },
-    //     attrs: { line: { stroke: "#000" } },
-    //   })
-    // );
 
     const ControlDefinition = new shapes.standard.Circle({
       position: {
@@ -282,15 +261,9 @@ const FlowChart = ({ isFileUploading, jsonData }) => {
 
     yOffset += 150;
 
+
     elements.push(ControlDefinition);
     elements.push(ControlDefinitionText);
-    // links.push(
-    //   new shapes.standard.Link({
-    //     source: { id: ControlDefinition.id },
-    //     target: { id: ControlDefinitionText.id },
-    //     attrs: { line: { stroke: "#000" } },
-    //   })
-    // );
     graph.addCells([...elements, ...links]);
 
     paper.on("element:pointerdblclick", (elementView) => {
@@ -329,7 +302,7 @@ const FlowChart = ({ isFileUploading, jsonData }) => {
   if (Object.keys(jsonData).length > 0 && !isFileUploading)
     return (
       <Stack
-        sx={isFullScreen ? FullScreenSx : { width: "90%", margin: "36px" }}
+        sx={isFullScreen ? FullScreenSx : { width: "100%" }}
       >
         <IconButton
           id="heyyyyy"
@@ -343,18 +316,8 @@ const FlowChart = ({ isFileUploading, jsonData }) => {
           sx={{
             borderRadius: 2,
             overflow: "auto",
-            maxHeight: "100%",
-            width: "100%",
             padding: 2,
-            position: isFullScreen ? "absolute" : "unset",
-            ...(isFullScreen
-              ? {
-                  justifyContent: "center",
-                  alignItems: "center",
-                  display: "flex",
-                  padding: "100px 0",
-                }
-              : {}),
+            marginTop: isFullScreen ? "-42px" : "0px"
           }}
         >
           <Box
